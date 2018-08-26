@@ -1,0 +1,25 @@
+* {margin: 0; padding: 0;}
+main nav {
+    text-align: center;
+    padding: 1rem 0;
+}
+main nav h1 {
+    color: #0984e3;
+    font-size: 5rem;
+    font-family: 'Nothing You Could Do', cursive;
+}
+section.todoOp {
+    width: 60%;
+    margin: auto;
+}
+section.todoOp .input-field * {
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.3rem;
+    padding: 1rem 1.2rem;
+    letter-spacing: .2px;
+    font-family: 'Merriweather';
+    color: rgba(45, 52, 54,1.0);
+    box-shadow: 2px 2px 3px rgba(45, 52, 54, 0.5);
+}
