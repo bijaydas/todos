@@ -1,12 +1,36 @@
 import React from 'react';
 import NavBar from './NavBar';
+import TodoItems from './TodoItems';
+
 
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
             addTodoValue: '',
-            todoList: []
+            todoList: [
+                {
+                    id: 1,
+                    todo: 'Making coffee'
+                },
+                {
+                    id: 2,
+                    todo: 'Go for a walk'
+                },
+                {
+                    id: 3,
+                    todo: 'Buy an iPad'
+                },
+                {
+                    id: 4,
+                    todo: 'Move to Paris'
+                },
+                {
+                    id: 5,
+                    todo: 'Move to Chzech Republic'
+                },
+
+            ]
         };
 
         this.updateTodoInputValue = this.updateTodoInputValue.bind(this);
@@ -23,16 +47,22 @@ class App extends React.Component {
             // Adding current Todo value from state
             let todo = this.state.addTodoValue;
 
+            // Clear the input box
+            this.setState({addTodoValue: ''});
+
             // Copying existing TodoList
             let todoList = this.state.todoList;
 
+            // Fetching the last id from list and adding 1 with it
+            let lastID = this.state.todoList[this.state.todoList.length - 1].id;
+            lastID++;
+
             // Pushing the new todo value from state to the copied todo list
-            todoList.push(todo);
+            todoList.push({id: lastID, todo: todo});
 
             // Finally adding the updated arr to the state todoList
+            this.setState({todoList: todoList});
 
-            this.setState({ todoList: todoList });
-            console.log(this.state.todoList);
         }
     }
 
@@ -49,6 +79,10 @@ class App extends React.Component {
                             maxLength="90"
                             type="text" autoFocus="true" placeholder="Add todo"
                         />
+                    </div>
+
+                    <div className="todo-list-container">
+                        <TodoItems todo={this.state.todoList}/>
                     </div>
                 </section>
             </main>

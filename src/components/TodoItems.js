@@ -1,13 +1,18 @@
 import React from 'react';
 
-class TodoItems extends React.Component {
-    render() {
+const TodoItems = ( props ) => {
+    const li = props.todo.map(( key, value ) => {
         return(
-            <div className="card-panel z-depth-2">
-                <h4 className="display-4">The list</h4>
-            </div>
+            <li key={key.id}>
+                {key.todo}
+                <i className="far fa-trash-alt"></i>
+            </li>
         );
-    }
+    });
+    return(
+        <ul>
+            {li}
+        </ul>
+    );
 }
-
 export default TodoItems;
