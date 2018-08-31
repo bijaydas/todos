@@ -9,26 +9,22 @@ class App extends React.Component {
         this.state = {
             addTodoValue: '',
             todoList: [
-                // {
-                //     id: 1,
-                //     todo: 'Making coffee'
-                // },
-                // {
-                //     id: 2,
-                //     todo: 'Go for a walk'
-                // },
-                // {
-                //     id: 3,
-                //     todo: 'Buy an iPad'
-                // },
-                // {
-                //     id: 4,
-                //     todo: 'Move to Paris'
-                // },
-                // {
-                //     id: 5,
-                //     todo: 'Move to Chzech Republic'
-                // }
+                {
+                    id: 1,
+                    todo: 'Buy eggs'
+                },
+                {
+                    id: 2,
+                    todo: 'Clean the house'
+                },
+                {
+                    id: 3,
+                    todo: 'Call Naina'
+                },
+                {
+                    id: 4,
+                    todo: 'Pay the mobile bill'
+                }
             ]
         };
 

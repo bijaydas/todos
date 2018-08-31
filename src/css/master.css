@@ -25,6 +25,10 @@ section.todoOp .input-field input {
     color: rgba(45, 52, 54,1.0);
     box-shadow: 2px 2px 3px rgba(45, 52, 54, 0.5);
 }
+section.todoOp .input-field input:focus {
+    box-shadow: 6px 5px 10px 1px rgba(45, 52, 54, 0.5);
+}
+
 .todo-list-container {
     margin-top: 1rem;
 }
