@@ -2,30 +2,14 @@ import React from 'react';
 import NavBar from './NavBar';
 import TodoItems from './TodoItems';
 
+import { connect } from 'react-redux';
+
 class App extends React.Component {
 
     constructor() {
         super();
         this.state = {
             addTodoValue: '',
-            todoList: [
-                {
-                    id: 1,
-                    todo: 'Buy eggs'
-                },
-                {
-                    id: 2,
-                    todo: 'Clean the house'
-                },
-                {
-                    id: 3,
-                    todo: 'Call Naina'
-                },
-                {
-                    id: 4,
-                    todo: 'Pay the mobile bill'
-                }
-            ]
         };
 
         this.updateTodoInputValue = this.updateTodoInputValue.bind(this);
@@ -74,7 +58,6 @@ class App extends React.Component {
     }
 
     render() {
-
         return(
             <main>
                 <NavBar/>
@@ -85,12 +68,12 @@ class App extends React.Component {
                             onChange={this.updateTodoInputValue}
                             onKeyPress={this.checkForSubmit}
                             maxLength="90"
-                            type="text" autoFocus="true" placeholder="Add todo"
+                            type="text" autoFocus={true} placeholder="Add todo"
                         />
                     </div>
 
                     <div className="todo-list-container">
-                        <TodoItems handleDelete={this.handleDelete} todo={this.state.todoList}/>
+                        <TodoItems handleDelete={this.handleDelete} todo={this.props.todos}/>
                     </div>
                 </section>
             </main>
@@ -98,4 +81,10 @@ class App extends React.Component {
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        todos: state
+    }
+}
+
+export default connect(mapStateToProps)(App);
