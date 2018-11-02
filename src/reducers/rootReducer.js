@@ -6,6 +6,10 @@ const initState =  [
 ]
 
 const rootReducer = (state = initState, action) => {
+    if (action.type === 'ADD_TODO') {
+        let newState = [...state, { id: action.id, todo: action.todo }];
+        state = newState;
+    }
     return state;
 }
 

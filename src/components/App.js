@@ -8,45 +8,38 @@ class App extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            addTodoValue: '',
-        };
+        this.state = { addTodoValue: '' };
 
-        this.updateTodoInputValue = this.updateTodoInputValue.bind(this);
-        this.checkForSubmit       = this.checkForSubmit.bind(this);
-        this.handleDelete         = this.handleDelete.bind(this);
-    }
-
-    updateTodoInputValue(e) {
-        this.setState({ addTodoValue: e.target.value });
+        this.checkForSubmit = this.checkForSubmit.bind(this);
+        this.handleDelete   = this.handleDelete.bind(this);
     }
 
     checkForSubmit(e) {
         if ( e.key == 'Enter' ) {
 
             // Adding current Todo value from state
-            let todo = this.state.addTodoValue;
-            // Clear the input box
-            this.setState({addTodoValue: ''});
+            let todo = this.props.todos;
 
-            // Copying existing TodoList
-            let todoList = this.state.todoList;
+            // // Copying existing TodoList
+            let todoList = this.props.todos;
 
             // Initializing the lastID with 1
             let lastID = 1;
 
             if (todoList.length > 0) {
+
                 // If there are some todos present in the array then
+
                 // Fetching the last id from list and adding 1 with it
-                lastID = this.state.todoList[this.state.todoList.length - 1].id;
+                lastID = this.props.todos[this.props.todos.length - 1].id;
                 lastID++;
             }
 
-            // Pushing the new todo value from state to the copied todo list
-            todoList.push({id: lastID, todo: todo});
+            // Adding the todo to the store
+            this.props.addTodoToStore({ type: 'ADD_TODO', id: lastID, todo: this.state.addTodoValue });
 
-            // Finally adding the updated arr to the state todoList
-            this.setState({todoList: todoList});
+            // Finally clearing the input box
+            this.setState({addTodoValue: ''});
         }
     }
 
@@ -58,6 +51,7 @@ class App extends React.Component {
     }
 
     render() {
+
         return(
             <main>
                 <NavBar/>
@@ -65,7 +59,7 @@ class App extends React.Component {
                     <div className="input-field">
                         <input
                             value={this.state.addTodoValue}
-                            onChange={this.updateTodoInputValue}
+                            onChange={ e => this.setState({ addTodoValue: e.target.value }) }
                             onKeyPress={this.checkForSubmit}
                             maxLength="90"
                             type="text" autoFocus={true} placeholder="Add todo"
@@ -87,4 +81,9 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        addTodoToStore: data => dispatch(data)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);
