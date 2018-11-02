@@ -44,10 +44,7 @@ class App extends React.Component {
     }
 
     handleDelete(idToRemove) {
-        let NewTodoList = this.state.todoList.filter(data => {
-            if ( data.id != idToRemove ) return data;
-        });
-        this.setState({ todoList: NewTodoList });
+        this.props.remotveTodo({ type: 'REMOVE_TODO', id: idToRemove });
     }
 
     render() {
@@ -83,7 +80,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTodoToStore: data => dispatch(data)
+        addTodoToStore: data => dispatch(data),
+        remotveTodo: id => dispatch(id)
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(App);
